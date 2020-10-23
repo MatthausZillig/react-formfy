@@ -13,15 +13,34 @@ npm install --save react-formfy
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
-import MyComponent from 'react-formfy'
-import 'react-formfy/dist/index.css'
+import { useFormfy, Input } from 'react-formfy'
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
+const App = () => {
+  const email = useFormfy('email')
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    if (email.validate()) {
+      console.log('Enviar')
+    } else {
+      console.log('Não enviar')
+    }
   }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Input
+        label='email'
+        id='email'
+        type='email'
+        placeholder='email'
+        {...email}
+      />
+      <button>Enviar</button>
+    </form>
+  )
 }
 ```
 
